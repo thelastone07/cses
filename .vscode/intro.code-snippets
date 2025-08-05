@@ -1,0 +1,21 @@
+{
+  "C++ Boilerplate": {
+    "prefix": "#incl", // what you type to trigger the snippet
+    "body": [
+      "#include<bits/stdc++.h>",
+      "using namespace std;",
+      "",
+      "void solve() {",
+      "    $0",
+      "}",
+      "",
+      "int main() {",
+      "    ios::sync_with_stdio(false);",
+      "    cin.tie(nullptr);",
+      "    solve();",
+      "    return 0;",
+      "}"
+    ],
+    "description": "Basic C++ fast I/O template with solve()"
+  }
+}
