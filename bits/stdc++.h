@@ -17,5 +17,6 @@
 #include <climits>
 #include <numeric>
 #include<functional>
+#include <bitset>
 
 // Add more standard headers as needed
