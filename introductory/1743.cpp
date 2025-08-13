@@ -4,35 +4,44 @@ using namespace std;
 void solve() {
     string s;
     cin >> s;
-    string ans = "";
-    
-    map<char,int> mp;
-    vector<int> idx(26,1e6+7);
-    for (char ch : s) mp[ch]++;
+    int n = s.size();
+    vector<int> freq(26,0);
+    for (char c : s) freq[c-'A']++;
 
-    int i = 0;
-    auto it = mp.begin();
-    bool go_back = false;
-    while (it != mp.end()) {
-        char key = it->first;
-        int &val = it->second;
+    int maxFreq = *max_element(freq.begin(), freq.end());
 
-        if (val == 0) {
-            ++it;
-            continue;
-        }
-        val--;
-        idx[val-'A'] = min(idx[val-'A'],i);
-        i++;
-        if (go_back) {
-            it--;
-        }
-        else {
-            if (val) go_back = true;
-            it++;
-        }
-
+    if (maxFreq > (n+1)/2) {
+        cout << -1 << '\n';
+        return;
     }
+
+    string result;
+    result.reserve(n);
+    char last = '\0';
+
+    for (int i = 0; i < n; i++) {
+        int choice = -1;
+        for (int c = 0; c < 26; c++) {
+            if (freq[c] == 0) continue;
+            if (last == char('A' + c)) continue;
+
+            freq[c]--;
+            int remaining = n - (i + 1);
+            int futureMax = *max_element(freq.begin(), freq.end());
+            if (futureMax <= (remaining+1)/2) {
+                choice = c;
+                break;
+            }
+            freq[c]++;
+        }
+        if (choice == -1) {
+            cout << -1 << '\n';
+            return;
+        }
+        result.push_back('A' + choice);
+        last = 'A' + choice;
+    }
+    cout << result << '\n';
 
 }
 
