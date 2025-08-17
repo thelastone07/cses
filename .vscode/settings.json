@@ -5,6 +5,7 @@
         "xiosbase": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "queue": "cpp"
     }
 }
