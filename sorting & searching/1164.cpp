@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+ 
 void solve() {
     int n;
     cin >> n;
@@ -17,7 +17,7 @@ void solve() {
     for (int i = 1; i < n; i++) {
         int k = pq.size();
         auto [u,z] = pq.top();
-        if (u <= v[i][0]) {
+        if (u < v[i][0]) {
             pq.pop();
             pq.push({v[i][1],z});
             ans[v[i][2]] = z;
@@ -27,11 +27,12 @@ void solve() {
             ans[v[i][2]] = k + 1;
         }
     }
+    cout << *max_element(ans.begin(), ans.end()) << " \n";
     for (int i =0;i < n; i++) cout << ans[i] << " ";
     cout << '\n';
     
 }
-
+ 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
