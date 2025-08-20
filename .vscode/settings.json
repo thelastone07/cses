@@ -6,6 +6,8 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "xhash": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "utility": "cpp",
+        "functional": "cpp"
     }
 }
