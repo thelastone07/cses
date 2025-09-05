@@ -8,6 +8,7 @@
         "xhash": "cpp",
         "queue": "cpp",
         "utility": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "map": "cpp"
     }
 }
