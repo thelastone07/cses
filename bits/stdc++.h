@@ -18,5 +18,6 @@
 #include <numeric>
 #include<functional>
 #include <bitset>
+#include <unordered_set>
 
 // Add more standard headers as needed
