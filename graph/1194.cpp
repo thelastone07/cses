@@ -11,10 +11,12 @@ void solve() {
         for (int j = 0; j < m; j++) {
             if (s[i][j] == 'M') monsters.push_back({i,j});
             if (s[i][j] == 'A') a = {i,j};
-            if (i == 0 || i == n-1 || j == 0 || j == n-1) {
+            if (i == 0 || i == n-1 || j == 0 || j == m-1) {
                 if (s[i][j] == 'A') {
+                    // cout << i << " " << j << '\n';
                     cout << "YES\n";
                     cout << 0;
+                    return;
                 }
                 if (s[i][j] == '.')
                 goals.push_back({i,j});
@@ -66,8 +68,9 @@ void solve() {
             int x = i + dx;
             int y = j + dy;
             if (!valid(x,y)) continue;
+            int mon_time = mtime[x][y] != -1 ? mtime[x][y] : 1e9;
             if (mytime[x][y] != -1) continue;
-            if (mtime[x][y] <= t+1) continue;
+            if (mon_time <= t+1) continue;
             mytime[x][y] = t+1;
             dir[x][y] = d;
             prev[x][y] = {i,j};
@@ -88,7 +91,7 @@ void solve() {
     cout << "YES\n";
     string ans = "";
     pair<int,int> node = b;
-    cout << b.first << " " << b.second << '\n';
+    // cout << b.first << " " << b.second << '\n';
     while (node != a) {
         ans.push_back(dir[node.first][node.second]);
         node = prev[node.first][node.second];
