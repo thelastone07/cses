@@ -1,25 +1,46 @@
 #include<bits/stdc++.h>
 using namespace std;
-template <class T>
-using q = priority_queue<T, vector<T>, greater<T>>;
+int n, m;
+vector<tuple<int,int,int>> v;
+vector<int> root, sz;
+int find(int x) {
+    if (root[x] == x) return x;
+    else return root[x] = find(root[x]);
+}
+void unite(int x, int y) {
+    int parx = find(x);
+    int pary = find(y);
+    if (sz[parx] < sz[pary]) {
+        root[parx] = pary;
+        sz[pary] += sz[parx];
+    }
+    else {
+        root[pary] = parx;
+        sz[parx] += sz[pary];
+    }
+}
 void solve() {
-    int n, m;
     cin >> n >> m;
-    q<tuple<int,int,int>> pq;
-    vector<int> vis(n+1);
-    for (int i = 1; i <= m; i++) {
-        int a, b, c; cin >> a >> b >> c;
-        pq.push({c,min(a,b),max(a,b)});
+    for (int i = 0; i < m; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        v.emplace_back(c,a,b);
     }
-    int ans = 0;
-    while (!pq.empty()) {
-        auto [c,a,b] = pq.top();
-        pq.pop();
-        if (vis[a] && vis[b]) continue;
-        ans += c;
-        vis[a] = 1; vis[b] = 1;
+    sort(v.begin(), v.end());
+    root.resize(n+1); sz.resize(n+1,1);
+    long long int ans = 0;
+    for(int i = 1; i <= n; i++) root[i] = i;
+    for (int i = 0; i < m; i++) {
+        auto [w, x, y] = v[i];
+        if (find(x) == find(y)) continue;
+        ans += w;
+        unite(x,y);
     }
-    cout << ans ;
+    if (sz[find(1)] != n) {
+        cout << "IMPOSSIBLE\n";
+        return;
+    }
+    cout << ans << '\n';
 }
 
 int main() {
