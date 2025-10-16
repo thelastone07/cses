@@ -16,7 +16,7 @@ void rdfs(int u) {
     rvis[u] = 1;
     for (auto v :radj[u]) {
         if (rvis[v]) continue;
-        dfs(v);
+        rdfs(v);
     }
 }
 
@@ -32,7 +32,22 @@ void solve() {
     vector<pair<int,int>> ans;
     vis.resize(n+1); rvis.resize(n+1);
     dfs(1);
-     
+    for (int i = 2; i <= n; i++) {
+        if (!vis[i]) {
+            cout << "NO\n";
+            cout << 1 << " " << i;
+            return;
+        }
+    } 
+    rdfs(1);
+    for (int i = 2; i <= n; i++) {
+        if (!rvis[i]) {
+            cout << "NO\n";
+            cout << i << " " << 1;
+            return;
+        }
+    }
+   cout << "YES";
 }
 
 int main() {
