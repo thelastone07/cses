@@ -9,6 +9,7 @@
         "queue": "cpp",
         "utility": "cpp",
         "functional": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "xlocale": "cpp"
     }
 }
